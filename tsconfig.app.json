@@ -20,12 +20,6 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-
-    /* Path Aliases */
-    "baseUrl": "./src",
-    "paths": {
-      "@app/*": ["./*"]
-    }
   },
   "include": ["src"]
 }

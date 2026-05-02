@@ -1,8 +1,10 @@
 {
   "files": [],
-  "baseUrl": "./src",
-  "paths":{
-    "@app/*": ["./*"]
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@app/*": ["./*"]
+    }
   },
   "references": [
     { "path": "./tsconfig.app.json" },
