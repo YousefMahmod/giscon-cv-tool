@@ -1,7 +1,7 @@
 import { type CSSProperties, forwardRef } from "react";
 import { cn } from "@app/utils/style";
-import { Input, type InputProps } from "./ui/input";
 import { Label } from "./ui/label";
+import { Input, type InputProps } from "./ui/Input";
 
 const AppInput = forwardRef<HTMLInputElement, AppInputProps>(
   (
@@ -23,7 +23,7 @@ const AppInput = forwardRef<HTMLInputElement, AppInputProps>(
     return (
       <div className={cn("flex flex-col gap-1 w-full", containerClassName)}>
         {label && (
-          <Label className="text-text-primary text-xs font-semibold">
+          <Label className="text-text-secondary text-xs font-semibold">
             {label}
           </Label>
         )}

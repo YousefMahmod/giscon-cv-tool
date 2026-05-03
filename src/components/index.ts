@@ -1,9 +1,10 @@
 export { default as LoadingScreen } from "./LoadingScreen";
 export { Logo } from "./Logo";
+export { default as PageHeader } from "./PageHeader";
 
 // Layout components
 export { AppLayout } from "./layout/AppLayout";
-export { Navbar } from "./layout/Navbar";
+export { Navbar } from "./layout/Navbar/Navbar";
 export { Sidebar } from "./layout/Sidebar";
 
 // UI components

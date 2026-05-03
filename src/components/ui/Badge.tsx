@@ -1,6 +1,13 @@
 interface BadgeProps {
   children: React.ReactNode;
-  variant?: "success" | "warning" | "error" | "info" | "neutral";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "success"
+    | "warning"
+    | "error"
+    | "info"
+    | "neutral";
   size?: "sm" | "md";
   dot?: boolean;
 }
@@ -12,6 +19,8 @@ export const Badge = ({
   dot = false,
 }: BadgeProps) => {
   const variants = {
+    primary: "bg-primary text-on-primary border-primary",
+    secondary: "bg-bg-input text-text-primary border-border",
     success: "bg-green-100 text-green-800 border-green-200",
     warning: "bg-yellow-100 text-yellow-800 border-yellow-200",
     error: "bg-red-100 text-red-800 border-red-200",
@@ -25,6 +34,8 @@ export const Badge = ({
   };
 
   const dotColors = {
+    primary: "bg-primary",
+    secondary: "bg-text-secondary",
     success: "bg-green-500",
     warning: "bg-yellow-500",
     error: "bg-red-500",

@@ -1,6 +1,8 @@
 import React, { type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { showToast } from "../utils/toasts";
+import { handleApiError } from "../utils/errors";
 
 interface Props {
   children: ReactNode;
@@ -12,6 +14,17 @@ const queryClient = new QueryClient({
       retry: 1,
       refetchOnWindowFocus: false,
       staleTime: 5 * 60 * 1000, // 5 mins
+    },
+    mutations: {
+      onError: (error: any) => {
+        console.log({ error });
+
+        showToast({
+          title: "An error occurred",
+          subtitle: handleApiError(error),
+          variant: "error",
+        });
+      },
     },
   },
 });

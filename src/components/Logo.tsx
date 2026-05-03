@@ -2,10 +2,10 @@ import { Global } from "iconsax-react";
 
 interface LogoProps {
   size?: "sm" | "md" | "lg";
-  variant?: "sidebar" | "default";
+  variant?: "dark" | "light";
 }
 
-export const Logo = ({ size = "md", variant = "default" }: LogoProps) => {
+export const Logo = ({ size = "md", variant = "light" }: LogoProps) => {
   const sizes = {
     sm: {
       icon: 24,
@@ -23,7 +23,7 @@ export const Logo = ({ size = "md", variant = "default" }: LogoProps) => {
 
   const currentSize = sizes[size];
   const textColor =
-    variant === "sidebar" ? "text-text-white" : "text-text-secondary";
+    variant === "dark" ? "text-text-white" : "text-text-secondary";
 
   return (
     <div className="flex flex-col items-center gap-1">

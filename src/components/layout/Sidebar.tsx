@@ -24,7 +24,7 @@ export const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
         `}
       >
         <div className="px-6 py-6">
-          <Logo variant="sidebar" />
+          <Logo variant="dark" />
         </div>
 
         <nav className="px-4 space-y-1">
@@ -44,7 +44,9 @@ export const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
               {({ isActive }) => (
                 <>
                   <div className="shrink-0">
-                    {link.icon(isActive ? "#ffffff" : "#dddddd")}
+                    {link.icon(
+                      isActive ? "text-text-white" : "text-text-inactive",
+                    )}
                   </div>
                   <span
                     className={`${isActive ? "font-semibold" : "font-normal"}`}

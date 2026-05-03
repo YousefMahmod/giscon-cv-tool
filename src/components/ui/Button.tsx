@@ -7,12 +7,14 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
+  title?: string;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       children,
+      title,
       variant = "primary",
       size = "md",
       loading = false,
@@ -28,13 +30,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       "inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed";
 
     const variants = {
-      primary:
-        "bg-primary-container text-on-primary hover:bg-primary focus:ring-primary",
+      primary: "bg-primary text-on-primary hover:opacity-90 focus:ring-primary",
       secondary:
-        "bg-surface-container-lowest text-primary-container border border-primary-container hover:bg-surface-container-low focus:ring-primary-container",
+        "bg-bg-white text-text-primary border border-border hover:bg-bg-input focus:ring-primary",
       ghost:
-        "bg-transparent text-on-surface hover:bg-surface-container focus:ring-outline",
-      danger: "bg-error text-on-error hover:bg-error/90 focus:ring-error",
+        "bg-transparent text-text-primary hover:bg-bg-input focus:ring-border",
+      danger: "bg-error text-bg-white hover:opacity-90 focus:ring-error",
     };
 
     const sizes = {
@@ -46,13 +47,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={ref}
-        className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+        className={`cursor-pointer ${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
         disabled={disabled || loading}
         {...props}
       >
         {loading && <Refresh size={16} className="animate-spin" />}
         {!loading && icon && iconPosition === "left" && icon}
-        {children}
+        {title || children}
         {!loading && icon && iconPosition === "right" && icon}
       </button>
     );

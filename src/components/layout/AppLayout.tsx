@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Sidebar } from "./Sidebar";
-import { Navbar } from "./Navbar";
+import { Navbar } from "./Navbar/Navbar";
 
 export const AppLayout = () => {
   const location = useLocation();

@@ -1,0 +1,4 @@
+export const STAFF_CONSTANTS = {
+  DEFAULT_PAGE_SIZE: 10,
+  MAX_SKILLS_DISPLAY: 3,
+};

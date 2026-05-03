@@ -3,7 +3,7 @@ import axios, { type InternalAxiosRequestConfig } from "axios";
 // ---------------------- Axios Instance ----------------------
 
 export const HttpClient = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "http://localhost:3001",
   timeout: 60 * 1000,
   withCredentials: false,
 });

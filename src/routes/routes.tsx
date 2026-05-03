@@ -1,43 +1,53 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
+import { ROUTES } from "../constants/routes";
 
 // Lazy load pages
-const StaffListPage = lazy(() => import("@app/pages/staff/StaffListPage"));
-const StaffDetailsPage = lazy(() => import("@app/pages/staff/StaffDetailsPage"));
-const StaffFormPage = lazy(() => import("@app/pages/staff/StaffFormPage"));
-const ProjectListPage = lazy(() => import("@app/pages/projects/ProjectListPage"));
-const ProjectDetailsPage = lazy(
-  () => import("@app/pages/projects/ProjectDetailsPage")
+const StaffList = lazy(() => import("@app/features/staff/StaffList"));
+const StaffDetails = lazy(
+  () => import("@app/features/staff/views/StaffDetails"),
 );
-const ProjectFormPage = lazy(() => import("@app/pages/projects/ProjectFormPage"));
+const StaffForm = lazy(() => import("@app/features/staff/views/StaffForm"));
+const ProjectList = lazy(() => import("@app/features/projects/ProjectList"));
+const ProjectDetailsPage = lazy(
+  () => import("@app/features/projects/views/ProjectDetailsPage"),
+);
+const ProjectFormPage = lazy(
+  () => import("@app/features/projects/views/ProjectFormPage"),
+);
 const ParticipationFormPage = lazy(
-  () => import("@app/pages/participation/ParticipationFormPage")
+  () => import("@app/features/participation/ParticipationForm"),
 );
 const CVGeneratorPage = lazy(
-  () => import("@app/pages/cv-generator/CVGeneratorPage")
+  () => import("@app/features/cv-generator/CVGenerator"),
 );
-const CVPreviewPage = lazy(() => import("@app/pages/cv-generator/CVPreviewPage"));
+const CVPreviewPage = lazy(
+  () => import("@app/features/cv-generator/views/CVPreviewPage"),
+);
 
 export const routes = [
   // Redirect root
-  { path: "/", element: <Navigate to="/staff" replace /> },
+  {
+    path: ROUTES.root.path,
+    element: <Navigate to={ROUTES.staffList.path} replace />,
+  },
 
   // Staff
-  { path: "/staff", element: <StaffListPage /> },
-  { path: "/staff/new", element: <StaffFormPage /> },
-  { path: "/staff/:id", element: <StaffDetailsPage /> },
-  { path: "/staff/:id/edit", element: <StaffFormPage /> },
+  { path: ROUTES.staffList.path, element: <StaffList /> },
+  { path: ROUTES.staffNew.path, element: <StaffForm /> },
+  { path: ROUTES.staffDetails.path, element: <StaffDetails /> },
+  { path: ROUTES.staffEdit.path, element: <StaffForm /> },
 
   // Projects
-  { path: "/projects", element: <ProjectListPage /> },
-  { path: "/projects/new", element: <ProjectFormPage /> },
-  { path: "/projects/:id", element: <ProjectDetailsPage /> },
-  { path: "/projects/:id/edit", element: <ProjectFormPage /> },
+  { path: ROUTES.projectList.path, element: <ProjectList /> },
+  { path: ROUTES.projectNew.path, element: <ProjectFormPage /> },
+  { path: ROUTES.projectDetails.path, element: <ProjectDetailsPage /> },
+  { path: ROUTES.projectEdit.path, element: <ProjectFormPage /> },
 
   // Participation
-  { path: "/participation/new", element: <ParticipationFormPage /> },
+  { path: ROUTES.participationNew.path, element: <ParticipationFormPage /> },
 
   // CV Generator
-  { path: "/generator", element: <CVGeneratorPage /> },
-  { path: "/cv-preview", element: <CVPreviewPage /> }, // No layout
+  { path: ROUTES.cvGenerator.path, element: <CVGeneratorPage /> },
+  { path: ROUTES.cvPreview.path, element: <CVPreviewPage /> }, // No layout
 ];

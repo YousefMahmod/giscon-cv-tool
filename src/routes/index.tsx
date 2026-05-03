@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import { routes } from "./routes.tsx";
 import { AppLayout } from "@app/components/layout/AppLayout";
 import LoadingScreen from "@app/components/LoadingScreen";
+// import { Toaster } from "sonner";
+import { Toaster } from "../components/ui/sonner.tsx";
 
 export const AppRoutes = () => {
   return (
@@ -14,6 +16,7 @@ export const AppRoutes = () => {
           ))}
         </Route>
       </Routes>
+      <Toaster />
     </Suspense>
   );
 };
