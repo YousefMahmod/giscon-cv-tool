@@ -71,7 +71,7 @@ const StaffForm = () => {
       reset({
         name: staff.name,
         email: staff.email,
-        job_title: staff.job_title || "",
+        job_title: staff.jobTitle || "",
         phone: staff.phone || "",
         bio: staff.bio || "",
       });
@@ -171,7 +171,7 @@ const StaffForm = () => {
   }
 
   return (
-    <div className="p-8 max-w-4xl w-full mx-auto">
+    <div>
       <PageHeader
         title={isEditMode ? "Edit Employee" : "Add Employee"}
         subtitle={
@@ -188,12 +188,7 @@ const StaffForm = () => {
           <div className="w-full h-fit lg:w-80 bg-bg-white border border-border rounded-lg p-6">
             <Label>Profile Photo</Label>
             <div className="mt-4 flex flex-col items-center">
-              <Avatar
-                src={profilePicturePreview}
-                alt="Profile"
-                fallback="?"
-                size="xl"
-              />
+              <Avatar src={profilePicturePreview} alt="Profile" size="xl" />
               <input
                 type="file"
                 id="profile-picture"

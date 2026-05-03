@@ -1,17 +1,18 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { Edit, DocumentText } from "iconsax-react";
-import useStaffDetails from "../hooks/useStaffDetails";
+import CustomIcon from "@app/components/icons/CustomIcon";
+import PageHeader from "@app/components/PageHeader";
 import { Avatar } from "@app/components/ui/Avatar";
 import { Button } from "@app/components/ui/Button";
-import PageHeader from "@app/components/PageHeader";
-import TechnicalSkills from "../components/TechnicalSkills";
-import CustomIcon from "@app/components/icons/CustomIcon";
 import { ROUTES } from "@app/constants/routes";
+import { navigateTo } from "@app/utils/navigation";
+import { DocumentText, Edit } from "iconsax-react";
+import { useParams } from "react-router-dom";
 import ProjectHistory from "../components/ProjectHistory";
+import TechnicalSkills from "../components/TechnicalSkills";
+import useStaffDetails from "../hooks/useStaffDetails";
+import { handleApiError } from "@app/utils/errors";
 
 export default function StaffDetailsPage() {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const { data: staff, isLoading, error } = useStaffDetails(id || "");
 
   if (isLoading) {
@@ -25,19 +26,10 @@ export default function StaffDetailsPage() {
   if (error || !staff) {
     return (
       <div className="p-8">
-        <div className="text-error">Error loading staff details</div>
+        <div className="text-error">{handleApiError(error as any)}</div>
       </div>
     );
   }
-
-  const getInitials = (name: string) => {
-    return name
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2);
-  };
 
   return (
     <div className="p-8 max-w-7xl w-full mx-auto">
@@ -46,12 +38,7 @@ export default function StaffDetailsPage() {
       {/* Header Section */}
       <div className="bg-bg-white border border-border rounded-lg p-6 lg:p-8 mb-6">
         <div className="flex flex-col lg:flex-row items-start gap-6">
-          <Avatar
-            src={staff.imageSrc}
-            alt={staff.name}
-            fallback={getInitials(staff.name)}
-            size="xl"
-          />
+          <Avatar src={staff.imageSrc} alt={staff.name} size="xl" />
           <div className="flex-1 w-full">
             <div className="flex flex-col lg:flex-row items-start justify-between gap-4">
               <div className="flex-1">
@@ -83,7 +70,7 @@ export default function StaffDetailsPage() {
                     />
                   }
                   onClick={() =>
-                    navigate(ROUTES.staffEdit.path.replace(":id", staff.id))
+                    navigateTo(ROUTES.staffEdit.path.replace(":id", staff.id))
                   }
                   className="w-full sm:w-auto"
                 >
@@ -93,7 +80,7 @@ export default function StaffDetailsPage() {
                   variant="primary"
                   icon={<CustomIcon IconComponent={DocumentText} size={18} />}
                   onClick={() =>
-                    navigate(`${ROUTES.cvGenerator.path}?staffId=${staff.id}`)
+                    navigateTo(`${ROUTES.cvGenerator.path}?staffId=${staff.id}`)
                   }
                   className="w-full sm:w-auto"
                 >

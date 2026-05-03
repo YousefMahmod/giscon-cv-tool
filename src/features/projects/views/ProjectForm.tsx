@@ -5,6 +5,7 @@ import { Button } from "@app/components/ui/Button";
 import { Label } from "@app/components/ui/label";
 import { ROUTES } from "@app/constants/routes";
 import { navigateTo } from "@app/utils/navigation";
+import { formatDate } from "@app/utils/shared";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Add, CloseCircle } from "iconsax-react";
 import { useEffect, useState } from "react";
@@ -27,7 +28,7 @@ const projectFormSchema = z.object({
 
 type ProjectFormData = z.infer<typeof projectFormSchema>;
 
-export default function ProjectFormPage() {
+const ProjectForm = () => {
   const { id } = useParams<{ id: string }>();
 
   const isEditMode = !!id;
@@ -37,7 +38,11 @@ export default function ProjectFormPage() {
   const [newTech, setNewTech] = useState("");
 
   // Fetch project details if editing
-  const { data: project, isLoading } = useProjectDetails(id || "");
+  const {
+    data: project,
+    dataUpdatedAt,
+    isLoading,
+  } = useProjectDetails(id || "");
 
   // Form with validation
   const {
@@ -68,15 +73,16 @@ export default function ProjectFormPage() {
         name: project.name,
         client: project.client,
         location: project.location || "",
-        start_date: project.startDate || "",
-        end_date: project.endDate || "",
+        start_date: formatDate(project.startDate),
+        end_date: formatDate(project.endDate),
         description: project.description || "",
       });
+
       Promise.resolve().then(() => {
         setTechnologies(project.technologies || []);
       });
     }
-  }, [project, isEditMode, reset]);
+  }, [dataUpdatedAt, isEditMode]);
 
   const handleAddTech = () => {
     if (newTech.trim() && !technologies.includes(newTech.trim())) {
@@ -97,27 +103,18 @@ export default function ProjectFormPage() {
   };
 
   const onSubmit = async (data: ProjectFormData) => {
-    try {
-      const payload = {
-        name: data.name,
-        client: data.client,
-        location: data.location || undefined,
-        start_date: data.start_date || undefined,
-        end_date: data.end_date || undefined,
-        description: data.description || undefined,
-        technologies:
-          technologies.length > 0 ? technologies.join(", ") : undefined,
-      };
+    const payload = {
+      ...data,
+      technologies:
+        technologies.length > 0 ? technologies.join(", ") : undefined,
+    };
 
-      if (isEditMode && id) {
-        await updateMutation.mutateAsync({ id, payload });
-      } else {
-        await createMutation.mutateAsync(payload);
-      }
-      navigateTo(ROUTES.projectList.path);
-    } catch (error) {
-      console.error("Error saving project:", error);
+    if (isEditMode && id) {
+      await updateMutation.mutateAsync({ id, payload });
+    } else {
+      await createMutation.mutateAsync(payload);
     }
+    navigateTo(ROUTES.projectList.path);
   };
 
   if (isLoading && isEditMode) {
@@ -129,7 +126,7 @@ export default function ProjectFormPage() {
   }
 
   return (
-    <div className="p-8 max-w-4xl w-full mx-auto">
+    <>
       <PageHeader
         title={isEditMode ? "Edit Project" : "Add Project"}
         subtitle={
@@ -191,6 +188,7 @@ export default function ProjectFormPage() {
                 {...register("start_date")}
                 hasError={!!errors.start_date?.message}
                 helperText={errors.start_date?.message}
+                className="w-full"
               />
 
               <AppInput
@@ -200,6 +198,7 @@ export default function ProjectFormPage() {
                 {...register("end_date")}
                 hasError={!!errors.end_date?.message}
                 helperText={errors.end_date?.message}
+                className="w-full"
               />
             </div>
           </div>
@@ -296,6 +295,8 @@ export default function ProjectFormPage() {
           </div>
         </div>
       </form>
-    </div>
+    </>
   );
-}
+};
+
+export default ProjectForm;

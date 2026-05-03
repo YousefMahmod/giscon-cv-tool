@@ -17,8 +17,6 @@ const queryClient = new QueryClient({
     },
     mutations: {
       onError: (error: any) => {
-        console.log({ error });
-
         showToast({
           title: "An error occurred",
           subtitle: handleApiError(error),

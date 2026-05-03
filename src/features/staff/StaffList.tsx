@@ -1,47 +1,46 @@
 import Pagination from "@app/components/ui/Pagination";
 import Table from "@app/components/ui/Table";
 import { ROUTES } from "@app/constants/routes";
+import { navigateTo } from "@app/utils/navigation";
 import { Add } from "iconsax-react";
 import { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "../../components";
-import SectionTitle from "../../components/SectionTitle";
+import { Button, PageHeader } from "../../components";
 import CustomIcon from "../../components/icons/CustomIcon";
 import StaffRow from "./components/StaffRow";
 import useStaffList from "./hooks/useStaffList";
 import type { StaffListItem } from "./staff.types";
 
-const StaffList = () => {
-  const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 10;
+const PAGE_SIZE = 6;
 
-  const { data, isLoading } = useStaffList();
+const StaffList = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { data, dataUpdatedAt, isLoading } = useStaffList();
 
   const handleView = (id: string) => {
-    navigate(ROUTES.staffDetails.path.replace(":id", id));
+    navigateTo(ROUTES.staffDetails.path.replace(":id", id));
   };
 
   const handleEdit = (id: string) => {
-    navigate(ROUTES.staffEdit.path.replace(":id", id));
+    navigateTo(ROUTES.staffEdit.path.replace(":id", id));
   };
 
   const handleGenerateCV = (id: string) => {
-    navigate(`${ROUTES.cvGenerator.path}?staffId=${id}`);
+    navigateTo(`${ROUTES.cvGenerator.path}?staffId=${id}`);
   };
 
   // Client-side pagination
   const paginatedData = useMemo(() => {
     if (!data?.data) return [];
-    const startIndex = (currentPage - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
+    const startIndex = (currentPage - 1) * PAGE_SIZE;
+    const endIndex = startIndex + PAGE_SIZE;
     return data.data.slice(startIndex, endIndex);
-  }, [data, currentPage, pageSize]);
+  }, [dataUpdatedAt, currentPage]);
 
   const totalPages = useMemo(() => {
     if (!data?.total) return 0;
-    return Math.ceil(data.total / pageSize);
-  }, [data, pageSize]);
+    return Math.ceil(data.total / PAGE_SIZE);
+  }, [dataUpdatedAt]);
 
   const columns = [
     { header: "Employee" },
@@ -51,20 +50,28 @@ const StaffList = () => {
   ];
 
   return (
-    <div className="p-8 max-w-7xl w-full mx-auto">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-8">
-        <SectionTitle
-          title="Staff Directory"
-          subtitle={`Manage and organize technical experts across GISCON departments.`}
-        />
-        <Button
-          title="Add Staff"
-          icon={<CustomIcon IconComponent={Add} />}
-          onClick={() => navigate(ROUTES.staffNew.path)}
-          // className="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary font-semibold text-sm rounded-md hover:opacity-90 transition-opacity"
-        />
-      </div>
+    <>
+      <PageHeader
+        title="Staff Directory"
+        subtitle="Manage and organize technical experts across GISCON departments."
+        actions={
+          <>
+            <Button
+              title="Add Staff"
+              icon={<CustomIcon IconComponent={Add} />}
+              onClick={() => navigateTo(ROUTES.staffNew.path)}
+              className="hidden md:inline-flex"
+            />
+            <CustomIcon
+              IconComponent={Add}
+              className="md:hidden"
+              color="icon-primary"
+              size={28}
+            />
+          </>
+        }
+        hideBackButton
+      />
 
       {/* Table */}
       <Table<StaffListItem>
@@ -88,10 +95,10 @@ const StaffList = () => {
         currentPage={currentPage}
         totalPages={totalPages}
         totalItems={data?.total || 0}
-        pageSize={pageSize}
+        pageSize={PAGE_SIZE}
         onPageChange={setCurrentPage}
       />
-    </div>
+    </>
   );
 };
 

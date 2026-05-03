@@ -2,6 +2,8 @@ import { Eye, Edit, DocumentText } from "iconsax-react";
 import { Avatar } from "@app/components/ui/Avatar";
 import type { StaffListItem } from "../staff.types";
 import CustomIcon from "@app/components/icons/CustomIcon";
+import { navigateTo } from "@app/utils/navigation";
+import { ROUTES } from "@app/constants/routes";
 
 interface StaffRowProps {
   staff: StaffListItem;
@@ -20,18 +22,11 @@ export default function StaffRow({
     <>
       {/* Employee */}
       <td className="px-6 py-4">
-        <div className="flex items-center gap-4">
-          <Avatar
-            src={staff.imageSrc}
-            alt={staff.name}
-            fallback={staff.name
-              .split(" ")
-              .map((n) => n[0])
-              .join("")
-              .toUpperCase()
-              .slice(0, 2)}
-            size="md"
-          />
+        <div
+          className="flex items-center gap-4"
+          onClick={() => navigateTo(`${ROUTES.staffList.path}/${staff.id}`)}
+        >
+          <Avatar src={staff.imageSrc} alt={staff.name} size="md" />
           <div>
             <div className="font-semibold text-text-primary">{staff.name}</div>
             <div className="text-sm text-text-secondary">{staff.email}</div>

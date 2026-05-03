@@ -59,7 +59,11 @@ const ProjectHistory = ({
 
               {(startDate || endDate) && (
                 <div className="flex items-center gap-2 text-xs text-text-secondary mb-3">
-                  <CustomIcon IconComponent={Calendar} size={14} />
+                  <CustomIcon
+                    IconComponent={Calendar}
+                    size={14}
+                    color="icon-primary"
+                  />
                   <span>
                     {startDate ? dayjs(startDate).format("MMM YYYY") : ""}
                     {" - "}
@@ -78,7 +82,7 @@ const ProjectHistory = ({
                       {project.responsibilities.map((res, idx) => (
                         <li
                           key={idx}
-                          className="text-sm text-text-primary flex items-start gap-2"
+                          className="text-sm text-text-primary flex items-center gap-2"
                         >
                           <span className="text-primary mt-1">•</span>
                           <span>{res}</span>

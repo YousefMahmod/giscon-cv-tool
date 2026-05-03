@@ -8,7 +8,7 @@ const AdminProfile = () => {
         <span className="hidden md:block text-xs text-text-primary font-medium">
           Admin User
         </span>
-        <Avatar alt="Admin User" fallback="AU" size="sm" />
+        <Avatar alt="Admin User" size="sm" />
       </div>
     </div>
   );

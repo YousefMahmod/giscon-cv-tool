@@ -4,18 +4,19 @@ import { ROUTES } from "@app/constants/routes";
 import { navigateTo } from "@app/utils/navigation";
 import { Add } from "iconsax-react";
 import { useMemo, useState } from "react";
-import { Button } from "../../components";
-import SectionTitle from "../../components/SectionTitle";
+import { Button, PageHeader } from "../../components";
 import CustomIcon from "../../components/icons/CustomIcon";
 import ProjectRow from "./components/ProjectRow";
+import useDeleteProject from "./hooks/useDeleteProject";
 import useProjectList from "./hooks/useProjectList";
 import type { ProjectListItem } from "./projects.types";
 
+const PAGE_SIZE = 6;
+
 const ProjectList = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 10;
 
-  const { data, isLoading } = useProjectList();
+  const { data, dataUpdatedAt, isLoading } = useProjectList();
 
   const handleView = (id: string) => {
     navigateTo(ROUTES.projectDetails.path.replace(":id", id));
@@ -25,18 +26,25 @@ const ProjectList = () => {
     navigateTo(ROUTES.projectEdit.path.replace(":id", id));
   };
 
+  const deleteMutation = useDeleteProject();
+
+  const handleDelete = (id: string) => {
+    if (!confirm("Are you sure you want to delete this project?")) return;
+    deleteMutation.mutate(id);
+  };
+
   // Client-side pagination
   const paginatedData = useMemo(() => {
     if (!data?.data) return [];
-    const startIndex = (currentPage - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
+    const startIndex = (currentPage - 1) * PAGE_SIZE;
+    const endIndex = startIndex + PAGE_SIZE;
     return data.data.slice(startIndex, endIndex);
-  }, [data, currentPage, pageSize]);
+  }, [dataUpdatedAt, currentPage]);
 
   const totalPages = useMemo(() => {
     if (!data?.total) return 0;
-    return Math.ceil(data.total / pageSize);
-  }, [data, pageSize]);
+    return Math.ceil(data.total / PAGE_SIZE);
+  }, [dataUpdatedAt]);
 
   const columns = [
     { header: "Project" },
@@ -46,19 +54,29 @@ const ProjectList = () => {
   ];
 
   return (
-    <div className="p-8 max-w-7xl w-full mx-auto">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-8">
-        <SectionTitle
-          title="Project Directory"
-          subtitle={`Manage and organize engineering projects across GISCON departments.`}
-        />
-        <Button
-          title="Add Project"
-          icon={<CustomIcon IconComponent={Add} />}
-          onClick={() => navigateTo(ROUTES.projectNew.path)}
-        />
-      </div>
+    <>
+      <PageHeader
+        title="Project Directory"
+        subtitle={`Manage and organize engineering projects across GISCON departments.`}
+        actions={
+          <>
+            <Button
+              title="Add Project"
+              icon={<CustomIcon IconComponent={Add} />}
+              onClick={() => navigateTo(ROUTES.projectNew.path)}
+              className="hidden md:inline-flex"
+            />
+            <CustomIcon
+              IconComponent={Add}
+              className="md:hidden"
+              color="icon-primary"
+              onClick={() => navigateTo(ROUTES.projectNew.path)}
+              size={28}
+            />
+          </>
+        }
+        hideBackButton
+      />
 
       {/* Table */}
       <Table<ProjectListItem>
@@ -72,6 +90,7 @@ const ProjectList = () => {
             project={project}
             onView={handleView}
             onEdit={handleEdit}
+            onDelete={handleDelete}
           />
         )}
       />
@@ -81,10 +100,10 @@ const ProjectList = () => {
         currentPage={currentPage}
         totalPages={totalPages}
         totalItems={data?.total || 0}
-        pageSize={pageSize}
+        pageSize={PAGE_SIZE}
         onPageChange={setCurrentPage}
       />
-    </div>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import { type ButtonHTMLAttributes, forwardRef } from "react";
 import { Refresh } from "iconsax-react";
+import { cn } from "@app/utils/style";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "ghost" | "danger";
@@ -47,7 +48,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={ref}
-        className={`cursor-pointer ${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+        className={cn(
+          `cursor-pointer ${baseStyles} ${variants[variant]} ${sizes[size]}`,
+          className,
+        )}
         disabled={disabled || loading}
         {...props}
       >

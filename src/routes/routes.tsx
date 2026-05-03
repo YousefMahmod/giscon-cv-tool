@@ -1,6 +1,6 @@
-import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import { ROUTES } from "../constants/routes";
+import { lazy } from "react";
 
 // Lazy load pages
 const StaffList = lazy(() => import("@app/features/staff/StaffList"));
@@ -10,10 +10,10 @@ const StaffDetails = lazy(
 const StaffForm = lazy(() => import("@app/features/staff/views/StaffForm"));
 const ProjectList = lazy(() => import("@app/features/projects/ProjectList"));
 const ProjectDetailsPage = lazy(
-  () => import("@app/features/projects/views/ProjectDetailsPage"),
+  () => import("@app/features/projects/views/ProjectDetails"),
 );
 const ProjectFormPage = lazy(
-  () => import("@app/features/projects/views/ProjectFormPage"),
+  () => import("@app/features/projects/views/ProjectForm"),
 );
 const ParticipationFormPage = lazy(
   () => import("@app/features/participation/ParticipationForm"),

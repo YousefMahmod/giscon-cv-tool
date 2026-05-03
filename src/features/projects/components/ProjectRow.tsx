@@ -2,11 +2,15 @@ import CustomIcon from "@app/components/icons/CustomIcon";
 import dayjs from "dayjs";
 import { Edit, Eye } from "iconsax-react";
 import type { ProjectListItem } from "../projects.types";
+import { MdDelete } from "react-icons/md";
+import { navigateTo } from "@app/utils/navigation";
+import { ROUTES } from "@app/constants/routes";
 
 interface ProjectRowProps {
   project: ProjectListItem;
   onView?: (id: string) => void;
   onEdit?: (id: string) => void;
+  onDelete?: (id: string) => void;
   onGenerateReport?: (id: string) => void;
 }
 
@@ -14,12 +18,16 @@ export default function ProjectRow({
   project,
   onView,
   onEdit,
+  onDelete,
 }: ProjectRowProps) {
   return (
     <>
       {/* Project Name & Client */}
-      <td className="px-6 py-4">
-        <div>
+      <td className="px-6 py-4 cursor-pointer">
+        <div
+          className="cursor-pointer"
+          onClick={() => navigateTo(`${ROUTES.projectList.path}/${project.id}`)}
+        >
           <div className="text-sm font-semibold text-text-primary">
             {project.name}
           </div>
@@ -62,20 +70,26 @@ export default function ProjectRow({
       {/* Actions */}
       <td className="px-6 py-4 text-right">
         <div className="flex justify-end gap-3">
-          <button
+          <CustomIcon
+            IconComponent={Eye}
+            size={16}
+            color="icon-primary"
             onClick={() => onView?.(project.id)}
-            className="cursor-pointer hover:opacity-80 transition-opacity"
-            title="View Project"
-          >
-            <CustomIcon IconComponent={Eye} size={16} color="icon-primary" />
-          </button>
-          <button
+          />
+
+          <CustomIcon
+            IconComponent={Edit}
+            size={16}
+            color="icon-primary"
             onClick={() => onEdit?.(project.id)}
-            className="cursor-pointer hover:opacity-80 transition-opacity"
-            title="Edit Project"
-          >
-            <CustomIcon IconComponent={Edit} size={16} color="icon-primary" />
-          </button>
+          />
+
+          <CustomIcon
+            IconComponent={MdDelete}
+            size={16}
+            color="text-error"
+            onClick={() => onDelete?.(project.id)}
+          />
         </div>
       </td>
     </>

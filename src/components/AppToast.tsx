@@ -1,13 +1,7 @@
+import { TickSquare } from "iconsax-react";
 import { useMemo } from "react";
-import {
-  CloseCircle,
-  TickSquare,
-  CloseSquare,
-  InfoCircle,
-  Danger,
-} from "iconsax-react";
-import { Button } from "./ui/Button";
 import CustomIcon from "./icons/CustomIcon";
+import { Button } from "./ui/Button";
 
 const AppToast: React.FC<AppToastProps> = ({
   title,
@@ -85,7 +79,7 @@ const AppToast: React.FC<AppToastProps> = ({
         <Button
           variant="ghost"
           aria-label="Close"
-          className="cursor-pointer hover:opacity-70 transition-opacity shrink-0"
+          className="p-0 hover:bg-transparent bg-transparent h-fit w-fit"
           onClick={onClose}
         >
           X

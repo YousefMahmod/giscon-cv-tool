@@ -98,7 +98,7 @@ export const projectService = {
         subtitle: handleApiError(error as AxiosError<ApiError>),
         variant: "error",
       });
-      return null;
+      throw error;
     }
   },
 

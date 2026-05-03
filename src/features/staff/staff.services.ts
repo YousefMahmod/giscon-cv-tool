@@ -31,27 +31,27 @@ const transformStaffDetails = (
   apiStaff: StaffWithProjectsApiResponse,
 ): StaffDetails => {
   return {
-    id: apiStaff.id.toString(),
-    name: apiStaff.name,
-    email: apiStaff.email,
-    jobTitle: apiStaff.job_title || "",
-    phone: apiStaff.phone || "",
-    bio: apiStaff.bio || "",
-    skills: apiStaff.skills
+    id: apiStaff?.id?.toString(),
+    name: apiStaff?.name,
+    email: apiStaff?.email,
+    jobTitle: apiStaff?.job_title || "",
+    phone: apiStaff?.phone || "",
+    bio: apiStaff?.bio || "",
+    skills: apiStaff?.skills
       ? apiStaff.skills.split(",").map((s) => s.trim())
       : [],
-    imageSrc: apiStaff.profile_picture || "",
-    projects: apiStaff.projects.map((project) => ({
-      participationId: project.participation_id.toString(),
-      projectId: project.project_id.toString(),
-      projectName: project.project_name,
-      client: project.client,
-      role: project.role,
-      responsibilities: project.responsibilities
-        ? project.responsibilities.split(",").map((r) => r.trim())
+    imageSrc: apiStaff?.profile_picture || "",
+    projects: apiStaff?.projects.map((project) => ({
+      participationId: project?.participation_id?.toString(),
+      projectId: project?.project_id?.toString(),
+      projectName: project?.project_name,
+      client: project?.client,
+      role: project?.role,
+      responsibilities: project?.responsibilities
+        ? project.responsibilities.split(",")?.map((r) => r.trim())
         : [],
-      startDate: project.start_date,
-      endDate: project.end_date,
+      startDate: project?.start_date,
+      endDate: project?.end_date,
     })),
   };
 };
@@ -87,14 +87,16 @@ export const staffService = {
       const response = await HttpClient.get<StaffWithProjectsApiResponse>(
         ENDPOINTS.STAFF.DETAILS.replace(":id", id),
       );
+      console.log({ response });
       return transformStaffDetails(response.data);
     } catch (error) {
+      // console.log({ error });
       showToast({
         title: "Failed to fetch staff details",
         subtitle: handleApiError(error as AxiosError<ApiError>),
         variant: "error",
       });
-      return null;
+      throw error;
     }
   },
 
