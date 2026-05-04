@@ -34,7 +34,7 @@ const ProjectHistory = ({
         <Badge variant="secondary">{projects.length} Projects</Badge>
       </div>
 
-      <div className="space-y-4">
+      <div className="flex flex-col gap-2">
         {projects.map((project) => {
           const startDate = (project as any).startDate;
           const endDate = (project as any).endDate;

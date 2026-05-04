@@ -1,6 +1,6 @@
 import CustomIcon from "@app/components/icons/CustomIcon";
 import { formatDate } from "@app/utils/shared";
-import { Calendar, Location } from "iconsax-react";
+import { Location } from "iconsax-react";
 import type { ProjectDetails } from "../projects.types";
 
 interface Props {

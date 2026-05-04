@@ -1,4 +1,4 @@
-import { Profile2User, Folder2, DocumentText } from "iconsax-react";
+import { Profile2User, Folder2, DocumentText, Link2 } from "iconsax-react";
 import type { ReactElement } from "react";
 import CustomIcon from "../components/icons/CustomIcon";
 
@@ -20,6 +20,13 @@ export const navLinks: NavLink[] = [
     label: "Projects",
     icon: (color: string) => (
       <CustomIcon IconComponent={Folder2} color={color} size={24} />
+    ),
+  },
+  {
+    path: "/participation",
+    label: "Link Staff",
+    icon: (color: string) => (
+      <CustomIcon IconComponent={Link2} color={color} size={24} />
     ),
   },
   {

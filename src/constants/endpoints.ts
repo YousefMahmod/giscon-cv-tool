@@ -3,10 +3,13 @@ export const ENDPOINTS = {
   STAFF: {
     LIST: "/staff",
     DETAILS: "/staff/:id",
-    PROJECTS: "/staff/:id/projects",
+    WITH_PROJECTS: "/staff/with-projects",
   },
   PROJECTS: {
     LIST: "/projects",
     DETAILS: "/projects/:id",
+  },
+  PARTICIPATION: {
+    CREATE: "/staff/participation",
   },
 };

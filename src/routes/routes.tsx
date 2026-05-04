@@ -15,7 +15,7 @@ const ProjectDetailsPage = lazy(
 const ProjectFormPage = lazy(
   () => import("@app/features/projects/views/ProjectForm"),
 );
-const ParticipationFormPage = lazy(
+const ParticipationForm = lazy(
   () => import("@app/features/participation/ParticipationForm"),
 );
 const CVGeneratorPage = lazy(
@@ -45,7 +45,7 @@ export const routes = [
   { path: ROUTES.projectEdit.path, element: <ProjectFormPage /> },
 
   // Participation
-  { path: ROUTES.participationNew.path, element: <ParticipationFormPage /> },
+  { path: ROUTES.participation.path, element: <ParticipationForm /> },
 
   // CV Generator
   { path: ROUTES.cvGenerator.path, element: <CVGeneratorPage /> },

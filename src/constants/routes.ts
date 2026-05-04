@@ -36,9 +36,9 @@ export const ROUTES = {
   },
 
   // Participation
-  participationNew: {
-    name: "New Participation",
-    path: "/participation/new",
+  participation: {
+    name: "Link Staff",
+    path: "/participation",
   },
 
   // CV Generator
