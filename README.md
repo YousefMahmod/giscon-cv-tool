@@ -78,9 +78,6 @@ export const HttpClient = axios.create({
 
 ```
 giscon-cv-tool/
-├── public/                      # Static assets
-│   └── media/
-│       └── templates/           # Template preview images
 ├── src/
 │   ├── assets/                  # Application assets
 │   ├── components/              # Reusable UI components

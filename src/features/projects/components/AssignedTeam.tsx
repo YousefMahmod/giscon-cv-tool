@@ -28,24 +28,22 @@ export default function AssignedTeam({ staffs }: Props) {
           <p>No staff members assigned to this project</p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="flex flex-col gap-4">
           {staffs.map((staff) => (
             <div
               key={staff.id}
-              className="border border-border rounded-lg p-4 hover:border-primary transition-colors"
+              className="flex gap-4 items-center hover:border-primary transition-colors"
               onClick={() => navigateTo(`${ROUTES.staffList.path}/${staff.id}`)}
             >
-              <div className="flex gap-4">
-                <Avatar src={staff.imageSrc} alt={staff.name} size="md" />
+              <Avatar src={staff.imageSrc} alt={staff.name} size="md" />
 
-                <div>
-                  <h3 className="font-semibold text-text-primary">
-                    {staff.name}
-                  </h3>
-                  {staff.role && (
-                    <p className="text-sm text-text-secondary">{staff.role}</p>
-                  )}
-                </div>
+              <div className="flex flex-col justify-center">
+                <h3 className="font-semibold text-text-primary">
+                  {staff.name}
+                </h3>
+                {staff.role && (
+                  <p className="text-sm text-text-secondary">{staff.role}</p>
+                )}
               </div>
             </div>
           ))}

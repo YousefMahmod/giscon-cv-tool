@@ -18,19 +18,14 @@ const TemplateCard = ({ template, isSelected, onClick }: TemplateCardProps) => {
           : "border-border hover:border-primary/50"
       }`}
     >
-      <div className="bg-bg-input relative">
-        {template.img ? (
+      <div className="w-full h-auto bg-bg-input relative">
+        {template.img && (
           <img
             src={template.img}
             alt={template.title}
             className="w-full h-auto border border-gray-100 transition-transform duration-300 group-hover:scale-[1.02]"
             style={{ aspectRatio: "1 / 1.414" }}
           />
-        ) : (
-          // </div>
-          <div className="w-full h-full flex items-center justify-center text-text-secondary">
-            <span className="text-4xl">📄</span>
-          </div>
         )}
         {isSelected && (
           <div className="absolute top-3 right-3 bg-primary rounded-full p-1 shadow-lg animate-in zoom-in duration-200">
