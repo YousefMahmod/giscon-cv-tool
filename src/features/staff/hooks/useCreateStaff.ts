@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { QUERIES_KEYS } from "@app/constants/queriesKeys";
+import { queryClient } from "@app/providers/ReactQueryProvider";
+import { useMutation } from "@tanstack/react-query";
 import { staffService } from "../staff.services";
 import type { CreateStaffPayload } from "../staff.types";
-import { queryClient } from "@app/providers/ReactQueryProvider";
 
 interface CreateStaffParams {
   payload: CreateStaffPayload | FormData;
