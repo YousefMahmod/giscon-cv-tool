@@ -54,14 +54,6 @@ Before running the application, ensure you have the following installed:
    yarn preview
    ```
 
-### Environment Configuration
-
-Create a `.env` file in the root directory if needed:
-
-```env
-VITE_API_BASE_URL=your_api_endpoint_here
-```
-
 ---
 
 ## 📁 Project Structure
@@ -127,9 +119,6 @@ giscon-cv-tool/
 │   │   └── participation/       # Project-staff participation
 │   │       ├── ParticipationForm.tsx
 │   │       └── hooks/
-│   ├── modals/                  # Modal management
-│   │   ├── ModalProvider.tsx
-│   │   └── useModal.tsx
 │   ├── providers/               # React context providers
 │   │   └── ReactQueryProvider.tsx
 │   ├── routes/                  # Route configuration
@@ -175,7 +164,6 @@ giscon-cv-tool/
 
 - **@tanstack/react-query 5.100.7** - Server state management, caching, and synchronization
 - **@tanstack/react-query-devtools** - DevTools for debugging React Query
-- **Zustand 5.0.12** - Lightweight state management
 - **Axios 1.15.2** - HTTP client for API requests
 
 ### Routing & Navigation
@@ -238,7 +226,7 @@ Each feature module (cv-generator, staff, projects, participation) follows a con
 ### State Management Strategy
 
 - **Server State**: React Query (TanStack Query)
-- **Client State**: React hooks and Zustand
+- **Client State**: React hooks
 - **Form State**: React Hook Form
 
 ---
@@ -249,7 +237,6 @@ Each feature module (cv-generator, staff, projects, participation) follows a con
 - ✅ **Staff Management**: CRUD operations for staff members
 - ✅ **Project Management**: CRUD operations for projects
 - ✅ **Participation Tracking**: Link staff members to projects
-- ✅ **Template System**: Multiple CV templates (Classic Serif, Mercury Flow, Atlantic Blue)
 - ✅ **PDF Export**: Backend-powered CV generation and download
 - ✅ **Responsive Design**: Mobile-friendly interface
 - ✅ **Type Safety**: Full TypeScript coverage
@@ -263,20 +250,10 @@ Each feature module (cv-generator, staff, projects, participation) follows a con
 npm run dev       # Start development server
 npm run build     # Build for production
 npm run preview   # Preview production build
-npm run lint      # Run ESLint
 ```
-
----
-
-## 🤝 Contributing
-
-1. Create a feature branch
-2. Make your changes
-3. Run `npm run lint` to check for issues
-4. Submit a pull request
 
 ---
 
 ## 📄 License
 
-[Add your license information here]
+MIT
