@@ -18,11 +18,8 @@ const ProjectFormPage = lazy(
 const ParticipationForm = lazy(
   () => import("@app/features/participation/ParticipationForm"),
 );
-const CVGeneratorPage = lazy(
+const CVGenerator = lazy(
   () => import("@app/features/cv-generator/CVGenerator"),
-);
-const CVPreviewPage = lazy(
-  () => import("@app/features/cv-generator/views/CVPreviewPage"),
 );
 
 export const routes = [
@@ -48,6 +45,5 @@ export const routes = [
   { path: ROUTES.participation.path, element: <ParticipationForm /> },
 
   // CV Generator
-  { path: ROUTES.cvGenerator.path, element: <CVGeneratorPage /> },
-  { path: ROUTES.cvPreview.path, element: <CVPreviewPage /> }, // No layout
+  { path: ROUTES.cvGenerator.path, element: <CVGenerator /> },
 ];

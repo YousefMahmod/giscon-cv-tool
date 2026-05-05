@@ -22,7 +22,7 @@ const ProvidersWrapper: React.FC<Props> = ({ children }) => {
   else
     return (
       <ReactQueryProvider>
-        <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <BrowserRouter>
           <ModalProvider>{children}</ModalProvider>
         </BrowserRouter>
       </ReactQueryProvider>

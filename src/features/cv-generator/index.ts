@@ -1,2 +1,1 @@
-export { default as CVGeneratorPage } from "./CVGenerator";
-export { default as CVPreviewPage } from "./views/CVPreviewPage";
+export { default as CVGenerator } from "./CVGenerator";

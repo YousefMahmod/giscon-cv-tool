@@ -14,7 +14,7 @@ export const Navbar = ({ onMenuClick }: NavbarProps) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
-    <nav className="h-16 bg-bg-white border-b border-border px-4 md:px-6 flex items-center justify-between">
+    <nav className="h-16 bg-bg-white border-b border-border px-4 md:px-6 flex items-center justify-between print:hidden">
       {/* Mobile: Hamburger + Logo */}
       <div className="flex items-center gap-4 lg:hidden">
         <Button

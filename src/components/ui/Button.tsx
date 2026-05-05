@@ -1,9 +1,10 @@
 import { type ButtonHTMLAttributes, forwardRef } from "react";
 import { Refresh } from "iconsax-react";
 import { cn } from "@app/utils/style";
+import CustomIcon from "../icons/CustomIcon";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "ghost" | "danger";
+  variant?: "primary" | "secondary" | "ghost" | "danger" | "outline";
   size?: "sm" | "md" | "lg";
   loading?: boolean;
   icon?: React.ReactNode;
@@ -34,6 +35,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       primary: "bg-primary text-on-primary hover:opacity-90 focus:ring-primary",
       secondary:
         "bg-bg-white text-text-primary border border-border hover:bg-bg-input focus:ring-primary",
+      outline:
+        "bg-transparent text-text-primary border border-border hover:bg-bg-input focus:ring-primary",
       ghost:
         "bg-transparent text-text-primary hover:bg-bg-input focus:ring-border",
       danger: "bg-error text-bg-white hover:opacity-90 focus:ring-error",
@@ -55,7 +58,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled || loading}
         {...props}
       >
-        {loading && <Refresh size={16} className="animate-spin" />}
+        {loading && (
+          <CustomIcon
+            IconComponent={Refresh}
+            size={16}
+            color="text-text-white"
+            variant="bold"
+            className="animate-spin"
+          />
+        )}
         {!loading && icon && iconPosition === "left" && icon}
         {title || children}
         {!loading && icon && iconPosition === "right" && icon}

@@ -7,18 +7,34 @@ const CustomIcon: FC<CustomIconProps> = ({
   size = 24,
   onClick,
   className,
+  variant = "light",
 }) => {
   return (
-    <button
-      onClick={onClick}
-      className={cn(
-        "p-0 h-fit w-fit",
-        { "cursor-pointer": onClick },
-        className,
+    <>
+      {onClick ? (
+        <button
+          onClick={onClick}
+          className={cn(
+            "p-0 h-fit w-fit",
+            { "cursor-pointer": onClick },
+            className,
+          )}
+        >
+          <IconComponent
+            size={size}
+            color={colorMapping[color]}
+            variant={variant}
+          />
+        </button>
+      ) : (
+        <IconComponent
+          size={size}
+          color={colorMapping[color]}
+          variant={variant}
+          className={className}
+        />
       )}
-    >
-      <IconComponent size={size} color={colorMapping[color]} />
-    </button>
+    </>
   );
 };
 
@@ -39,4 +55,5 @@ export interface CustomIconProps {
   color?: keyof typeof colorMapping;
   size?: string | number;
   className?: string;
+  variant?: "light" | "bold";
 }

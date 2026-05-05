@@ -3,13 +3,11 @@ export interface StaffApiResponse {
   id: number;
   name: string;
   email: string;
-  phone: string | null;
-  bio: string | null;
+  phone: string;
+  bio: string;
   job_title?: string;
   skills: string; // comma-separated string from API
-  profile_picture: string | null;
-  created_at: string;
-  updated_at: string;
+  profile_picture: string;
 }
 
 export interface StaffWithProjectsApiResponse extends StaffApiResponse {

@@ -12,12 +12,16 @@ export const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
   return (
     <>
       {/* Mobile overlay backdrop */}
-      <Overlay isOpen={isOpen} onClick={onToggle} className="lg:hidden" />
+      <Overlay
+        isOpen={isOpen}
+        onClick={onToggle}
+        className="lg:hidden print:hidden"
+      />
 
       {/* Sidebar */}
       <aside
         className={`
-          fixed lg:relative inset-y-0 left-0 z-50
+          fixed lg:relative inset-y-0 left-0 z-50 print:hidden
           w-64 bg-bg-sidebar border-r border-border
           transform transition-transform duration-200 ease-in-out
           ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}

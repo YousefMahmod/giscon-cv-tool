@@ -3,11 +3,11 @@ export interface ProjectApiResponse {
   id: number;
   name: string;
   client: string;
-  description: string | null;
-  location: string | null;
-  start_date: string | null;
-  end_date: string | null;
-  technologies: string | null; // comma-separated string from API
+  description?: string;
+  location?: string;
+  start_date?: string;
+  end_date?: string;
+  technologies?: string; // comma-separated string from API
 }
 
 export interface ProjectWithStaffsApiResponse extends ProjectApiResponse {
