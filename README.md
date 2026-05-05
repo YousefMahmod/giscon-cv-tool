@@ -1,73 +1,282 @@
-# React + TypeScript + Vite
+# GISCON CV Tool
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application for generating and managing professional CVs with multiple template options. Built with React 19, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+## 🚀 Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Prerequisites
 
-## React Compiler
+Before running the application, ensure you have the following installed:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Node.js**: Version 18.0.0 or higher
+- **npm** or **yarn**: Package manager (npm comes with Node.js)
+- **Git**: For cloning the repository
 
-## Expanding the ESLint configuration
+### Installation & Running the Server
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Clone the repository**
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+   ```bash
+   git clone <repository-url>
+   cd giscon-cv-tool
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+2. **Install dependencies**
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Run the development server**
+
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+   The application will start on `http://localhost:5173` by default.
+
+4. **Build for production**
+
+   ```bash
+   npm run build
+   # or
+   yarn build
+   ```
+
+5. **Preview production build**
+   ```bash
+   npm run preview
+   # or
+   yarn preview
+   ```
+
+### Environment Configuration
+
+Create a `.env` file in the root directory if needed:
+
+```env
+VITE_API_BASE_URL=your_api_endpoint_here
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📁 Project Structure
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+giscon-cv-tool/
+├── public/                      # Static assets
+│   └── media/
+│       └── templates/           # Template preview images
+├── src/
+│   ├── assets/                  # Application assets
+│   ├── components/              # Reusable UI components
+│   │   ├── icons/
+│   │   │   └── CustomIcon.tsx
+│   │   ├── layout/
+│   │   │   ├── AppLayout.tsx
+│   │   │   ├── Sidebar.tsx
+│   │   │   └── Navbar/
+│   │   │       ├── Navbar.tsx
+│   │   │       └── AdminProfile.tsx
+│   │   └── ui/                  # Base UI components (Button, Input, etc.)
+│   │       ├── Button.tsx
+│   │       ├── Input.tsx
+│   │       ├── Dropdown.tsx
+│   │       ├── Table.tsx
+│   │       └── ...
+│   ├── constants/               # Application constants
+│   │   ├── endpoints.ts         # API endpoint definitions
+│   │   ├── routes.ts            # Route paths
+│   │   ├── links.tsx            # Navigation links
+│   │   └── queriesKeys.ts       # React Query cache keys
+│   ├── features/                # Feature-based modules
+│   │   ├── cv-generator/        # CV Generator feature
+│   │   │   ├── CVGenerator.tsx  # Main CV generator component
+│   │   │   ├── cv.types.ts      # Type definitions
+│   │   │   ├── cv.services.ts   # API service layer
+│   │   │   ├── cv.constants.ts  # Feature constants
+│   │   │   ├── components/      # Feature-specific components
+│   │   │   │   ├── StaffSelector.tsx
+│   │   │   │   ├── ProjectSelector.tsx
+│   │   │   │   ├── TemplateSelector.tsx
+│   │   │   │   ├── TemplateCard.tsx
+│   │   │   │   └── Stepper.tsx
+│   │   │   └── hooks/           # Feature-specific hooks
+│   │   │       ├── useTemplates.ts
+│   │   │       └── useDownloadCV.ts
+│   │   ├── staff/               # Staff management feature
+│   │   │   ├── StaffList.tsx
+│   │   │   ├── components/
+│   │   │   ├── hooks/
+│   │   │   ├── views/
+│   │   │   │   ├── StaffDetails.tsx
+│   │   │   │   └── StaffForm.tsx
+│   │   │   └── ...
+│   │   ├── projects/            # Project management feature
+│   │   │   ├── ProjectList.tsx
+│   │   │   ├── components/
+│   │   │   ├── hooks/
+│   │   │   ├── views/
+│   │   │   │   ├── ProjectDetails.tsx
+│   │   │   │   └── ProjectForm.tsx
+│   │   │   └── ...
+│   │   └── participation/       # Project-staff participation
+│   │       ├── ParticipationForm.tsx
+│   │       └── hooks/
+│   ├── modals/                  # Modal management
+│   │   ├── ModalProvider.tsx
+│   │   └── useModal.tsx
+│   ├── providers/               # React context providers
+│   │   └── ReactQueryProvider.tsx
+│   ├── routes/                  # Route configuration
+│   │   ├── index.tsx
+│   │   └── routes.tsx
+│   ├── styles/                  # Global styles
+│   │   ├── _config.css          # CSS custom properties
+│   │   ├── _reset.css           # CSS reset
+│   │   ├── global.css           # Global styles
+│   │   └── theme.css            # Theme definitions
+│   ├── utils/                   # Utility functions
+│   │   ├── errors.ts            # Error handling utilities
+│   │   ├── navigation.ts        # Navigation helpers
+│   │   ├── shared.ts            # Shared utilities
+│   │   ├── style.ts             # Style utilities
+│   │   └── toasts.tsx           # Toast notifications
+│   ├── App.tsx                  # Root application component
+│   ├── main.tsx                 # Application entry point
+│   ├── HttpClient.ts            # Axios HTTP client configuration
+│   ├── ProvidersWrapper.tsx     # Application providers wrapper
+│   └── types.ts                 # Global type definitions
+├── design/                      # Design files and mockups
+├── .env                         # Environment variables
+├── eslint.config.js             # ESLint configuration
+├── tsconfig.json                # TypeScript configuration
+├── tsconfig.node.json           # TypeScript config for Node
+├── vite.config.ts               # Vite configuration
+├── package.json                 # Project dependencies
+└── README.md                    # Project documentation
+```
+
+---
+
+## 📚 Key Libraries & Technologies
+
+### Core Framework
+
+- **React 19.2.5** - Modern UI library with latest features
+- **TypeScript 6.0.2** - Type-safe JavaScript
+- **Vite 8.0.10** - Fast build tool and dev server
+
+### State Management & Data Fetching
+
+- **@tanstack/react-query 5.100.7** - Server state management, caching, and synchronization
+- **@tanstack/react-query-devtools** - DevTools for debugging React Query
+- **Zustand 5.0.12** - Lightweight state management
+- **Axios 1.15.2** - HTTP client for API requests
+
+### Routing & Navigation
+
+- **React Router Dom 7.14.2** - Client-side routing
+
+### Form Management & Validation
+
+- **React Hook Form 7.75.0** - Performant form handling
+- **Zod 4.4.2** - TypeScript-first schema validation
+- **@hookform/resolvers 5.2.2** - Form validation resolvers
+
+### Styling & UI
+
+- **Tailwind CSS 4.2.4** - Utility-first CSS framework
+- **@tailwindcss/vite 4.2.4** - Vite plugin for Tailwind
+- **tailwind-merge 3.5.0** - Merge Tailwind classes intelligently
+- **clsx 2.1.1** - Conditional className utility
+
+### UI Components
+
+- **@radix-ui/react-dialog 1.1.15** - Accessible dialog component
+- **@radix-ui/themes 3.3.0** - Radix UI design system
+- **Sonner 2.0.7** - Toast notifications
+- **Iconsax React 0.0.8** - Icon library
+- **React Icons 5.6.0** - Popular icon sets
+
+### Utilities
+
+- **dayjs 1.11.20** - Lightweight date manipulation
+
+### Development Tools
+
+- **ESLint 10.2.1** - Code linting
+- **TypeScript ESLint 8.58.2** - TypeScript-specific linting rules
+- **@vitejs/plugin-react 6.0.1** - React plugin for Vite
+
+---
+
+## 🏗️ Architecture Patterns
+
+### Feature-Based Structure
+
+Each feature module (cv-generator, staff, projects, participation) follows a consistent structure:
+
+- **Components**: Feature-specific UI components
+- **Hooks**: Custom React hooks for data fetching and mutations
+- **Services**: API communication layer
+- **Types**: TypeScript type definitions
+- **Constants**: Feature-specific constants
+- **Views**: Page-level components
+
+### Component Organization
+
+- **Reusable components** in `/src/components/ui/`
+- **Layout components** in `/src/components/layout/`
+- **Feature components** within their respective feature folders
+- **Self-contained components** with built-in data fetching (e.g., TemplateSelector)
+
+### State Management Strategy
+
+- **Server State**: React Query (TanStack Query)
+- **Client State**: React hooks and Zustand
+- **Form State**: React Hook Form
+
+---
+
+## 🎨 Key Features
+
+- ✅ **CV Generation**: Multi-step wizard with staff, project, and template selection
+- ✅ **Staff Management**: CRUD operations for staff members
+- ✅ **Project Management**: CRUD operations for projects
+- ✅ **Participation Tracking**: Link staff members to projects
+- ✅ **Template System**: Multiple CV templates (Classic Serif, Mercury Flow, Atlantic Blue)
+- ✅ **PDF Export**: Backend-powered CV generation and download
+- ✅ **Responsive Design**: Mobile-friendly interface
+- ✅ **Type Safety**: Full TypeScript coverage
+- ✅ **Modern UI**: Tailwind CSS with custom design system
+
+---
+
+## 📝 Available Scripts
+
+```bash
+npm run dev       # Start development server
+npm run build     # Build for production
+npm run preview   # Preview production build
+npm run lint      # Run ESLint
+```
+
+---
+
+## 🤝 Contributing
+
+1. Create a feature branch
+2. Make your changes
+3. Run `npm run lint` to check for issues
+4. Submit a pull request
+
+---
+
+## 📄 License
+
+[Add your license information here]
