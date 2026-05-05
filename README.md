@@ -1,6 +1,6 @@
 # GISCON CV Tool
 
-A modern web application for generating and managing professional CVs with multiple template options. Built with React 19, TypeScript, and Vite.
+A modern web application for managing staff members, projects, and generating professional CVs with multiple template options. The application allows you to manage staff profiles, create and track projects, link staff to projects, and generate customized CVs by selecting staff, their projects, and preferred templates. Built with React 19, TypeScript, and Vite.
 
 ## 🚀 Getting Started
 
@@ -53,6 +53,24 @@ Before running the application, ensure you have the following installed:
    # or
    yarn preview
    ```
+
+### API Configuration
+
+The application connects to a backend API. The base URL is configured in `src/HttpClient.ts`:
+
+```typescript
+export const HttpClient = axios.create({
+  baseURL: "http://localhost:3001", // Update this with your API URL
+  timeout: 60 * 1000,
+  withCredentials: false,
+});
+```
+
+**To change the API endpoint:**
+
+- Open `src/HttpClient.ts`
+- Update the `baseURL` value to your backend server address
+- Example: `baseURL: "http://localhost:8080"` or `baseURL: "https://api.yourdomain.com"`
 
 ---
 
