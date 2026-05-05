@@ -10,6 +10,8 @@ import ProjectHistory from "../components/ProjectHistory";
 import TechnicalSkills from "../components/TechnicalSkills";
 import useStaffDetails from "../hooks/useStaffDetails";
 import { handleApiError } from "@app/utils/errors";
+import { MdEmail } from "react-icons/md";
+import { FaPhoneAlt } from "react-icons/fa";
 
 export default function StaffDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -50,11 +52,21 @@ export default function StaffDetailsPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mt-3 text-sm text-text-secondary">
                   <span className="flex items-center gap-1">
-                    📧 {staff.email}
+                    <CustomIcon
+                      IconComponent={MdEmail}
+                      size={14}
+                      color="text-text-secondary"
+                    />
+                    {staff.email}
                   </span>
                   {staff.phone && (
                     <span className="flex items-center gap-1">
-                      📱 {staff.phone}
+                      <CustomIcon
+                        IconComponent={FaPhoneAlt}
+                        size={14}
+                        color="text-text-secondary"
+                      />
+                      {staff.phone}
                     </span>
                   )}
                 </div>
@@ -100,7 +112,7 @@ export default function StaffDetailsPage() {
             <h2 className="text-base font-semibold text-text-primary mb-3">
               Professional Summary
             </h2>
-            <p className="text-sm text-text-secondary leading-relaxed">
+            <p className="text-sm text-text-secondary leading-relaxed wrap-break-word">
               {staff.bio || "No bio available"}
             </p>
           </div>

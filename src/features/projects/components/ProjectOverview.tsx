@@ -59,7 +59,7 @@ export default function ProjectOverview({ project }: Props) {
         <h3 className="text-sm font-semibold text-text-primary mb-2">
           Full Description
         </h3>
-        <p className="text-sm text-text-secondary leading-relaxed">
+        <p className="text-sm text-text-secondary leading-relaxed wrap-break-word">
           {project.description || "No description available"}
         </p>
       </div>
